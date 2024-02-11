@@ -1,0 +1,35 @@
+<h3>Listado de Héroes</h3>
+
+<!-- deletedHero sino se borro nada es undefined o no existe 
+    si no hay valor para deletedHero, se muestra el nothingWasDeleted, se activa el ng-template.
+    #nothingWasDeleted es llamado como referencia local, solo podemos invocar algo dentro de este template
+-->
+<div *ngIf="deletedHero; else nothingWasDeleted">
+    <h3>Héroe borrado <small class="text-danger"> {{ deletedHero }} </small> </h3>
+</div>
+
+<!-- es un elemento que no existe y que envuelve otros elementos.
+    espera que algo lo active y muestra los elementos que tiene dentro.
+-->
+<ng-template #nothingWasDeleted>
+    <h3>No ha borrado nada.</h3>
+</ng-template>
+
+<!-- no se muestra el boton si el heroNames no tiene elmentos -->
+<button
+    *ngIf="heroNames.length > 0"
+    (click)="removeLastHero()"
+    class="btn btn-outline-danger">
+    Borrar último héroe
+</button>
+
+
+
+<ul class="mt-2 list-group">
+    <!-- itereamos sobre heroNames y por cada name generamos un elemento li con el nombre-->
+    <li *ngFor="let name of heroNames"
+        class="list-group-item">
+        {{ name }}
+    </li>
+</ul>
+
