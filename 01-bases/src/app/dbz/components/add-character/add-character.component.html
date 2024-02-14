@@ -1,0 +1,37 @@
+<h4>Agregar Personaje</h4>
+
+<!-- ngSubmit, esta directiva es de FormsModule  y este ejecuta la función para emitir los datos fuera del componente -->
+<form class="row" (ngSubmit)="emitCharacter()">
+
+    <!-- [] era para asociar un atributo y () un evento
+        usando [()] asociamos un atributo y evento a la vez, esto con la directiva ngModel
+        Debemos importar formModule para usarlo, este importación se realiza en el modulo dbz.module
+
+        [()] es el enlace de datos bidireccional o two way data binding y el binding o valor vinculante
+        es al que se le iguala, que es el character.name. Por lo que se actualiza es valor para el HTMl y la clase TS.
+        Esto tmb obliga a que el input tenga un name o un [ngModelOptions="{standalone: true}"], en este caso agregamos un name.
+    -->
+    <input 
+        type="text" 
+        [(ngModel)]="character.name"
+        name="name"
+        class="form-control mb-2" 
+        placeholder="Nombre"
+    >
+    <input 
+        type="number" 
+        [(ngModel)]="character.power"
+        name="power"
+        class="form-control mb-2" 
+        placeholder="Poder"
+    >
+    <button 
+        type="submit" 
+        class="btn btn-primary"
+    >
+        Agregar
+    </button>
+
+    <!-- | es un tuberia, pasa character a json, esto de los tuberias lo veremos más adelante -->
+    <!-- <pre>{{character | json}}</pre> -->
+</form>

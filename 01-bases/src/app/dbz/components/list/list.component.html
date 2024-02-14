@@ -1,0 +1,59 @@
+<h4>Listado</h4>
+<ul class="list-group">
+    <!-- dentro de ngfor no se puede destructurar el character a {name,power} 
+        es una caracteristica no soportada por angular
+    -->
+    <!-- 
+        Si queremos listar los valores, pues podemos crear una variable i que contenga los indices
+        index ya forma parte de ngfor. El ; es para separar el código, de por sí dentro de las comillas
+        podemos colocar JS.
+        first, last, odd(impar) y even(si es par) son otros valores que expone en ngFor
+    -->
+
+    <!-- Agregamos JS entre {{}} dentro de una clase, pero añadir esa condición añade mucha lógica -->
+    <!-- usaremos la directiva ngClass para agregar clases de forma condicional 
+        primero colocamos las clases a aplicar y luego del :, se coloca la condicion que deben cumplir.
+        Si colocamos true solamente como condición, eso hace que se aplique a todos los elementos.
+        Con coma podemos añadir más condiciones y clases
+    -->
+    <!-- 
+        Los atributos HTML que esten entre corchetes y le asignamos algo entre "", pues ese algo debe ser codigo de JS.
+        Vemos que class puede ser colocada ente corchete y colocar condificones de JS entre las comillas
+        [class]="'list-group-item'"  
+    -->
+    <li 
+        *ngFor="let character of characterList;
+            let i = index;
+            let isFirst = first;
+            let isLast = last;
+            let isEven = even;
+            let isOdd = odd;"
+        
+        class="list-group-item d-flex justify-content-between align-items-center"
+        [ngClass]="{
+            'list-group-item-success': isLast,
+            'list-group-item-primary': isOdd
+        }"
+    >
+            <div>
+                <span class="text-primary">{{i+1}}. </span>
+                <span>{{character.name}} - </span>
+                <strong>Power: </strong> {{character.power}} 
+            </div>
+            <button class="btn btn-danger" (click)="onDeleteCharacter(character.id)">X</button>
+
+            <!-- <span>Es el primero: {{ i===0 }} </span>
+            <span>Es el ultimo: {{ i=== characterList.length -1 }}</span> -->
+
+            <!-- Podemos usar directamente lo que nos provee angular y ni hacer condicionales -->
+            <!-- <span>Es el primero: {{ isFirst }} </span>
+            <span>Es el ultimo: {{ isLast }}</span> -->
+
+            <!-- tmb indicar si es par e impar, recordar que la lista empieza en 0 y estamos sumando 1,
+                por lo que se vera raro ver = 1. par: true impar: false
+            -->
+            <!-- <span>Es Par: {{ isEven }} </span>
+            <span>Es Impar: {{ isOdd }}</span> -->
+
+    </li>
+</ul>

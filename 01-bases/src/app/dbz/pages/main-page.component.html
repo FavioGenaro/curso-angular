@@ -1,0 +1,24 @@
+<h1>DBZ Personajes</h1>
+<hr>
+
+<div class="row">
+    <div class="col">
+        
+        <!-- 
+            ahora en el componente donde colocamos el decorador input, este puede recibir la propiedad
+            que indicamos y del mismo tipo, en este caso un arreglo de characters, es valido tmb un []
+        -->
+        <dbz-list [characterList]="characters" (onDelete)="onDeleteCharacter($event)"></dbz-list>
+        
+    </div>
+    <div class="col">
+        <!-- recordar que para eventos usamos () y para propiedades [] -->
+        <!-- 
+            cuando se emita onNewCharacter, pasará el valor como $event(nombre especifico de TS) al método onNewCharacterPadre
+            que es un método del main-page
+        -->
+        <dbz-add-character (onNewCharacter)="onNewCharacter($event)"></dbz-add-character>
+    </div>
+
+
+</div>
