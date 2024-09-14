@@ -10,6 +10,7 @@
         <!-- | es usado para crear PIPEs, un PIPE preprocesa la información si afectar el valor original, titlecase coloca la primera letra en mayuscula-->
         <button
             *ngFor="let tag of tags"
+            (click)="searchTag(tag)"
             class="list-group-item list-group-item-action">
             {{ tag | titlecase }}
         </button>

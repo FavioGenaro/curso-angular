@@ -12,12 +12,16 @@ export class SidebarComponent {
 
   // Obtenemos la lista tags (busquedas del usuario) 
   get tags(){ 
-    return this.gifsService.getTagsHistory();
+    return this.gifsService.tagsHistory;
   }
 
-  // 
   searchTag(newTag:string){
     this.gifsService.searchTag(newTag);
   }
+
+  // historySearch(e:MouseEvent){
+  //   console.log(e.target)
+  //   // this.gifsService.searchTag(e.target);
+  // }
 
 }
