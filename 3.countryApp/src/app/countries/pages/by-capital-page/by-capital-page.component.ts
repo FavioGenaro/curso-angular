@@ -15,8 +15,8 @@ export class ByCapitalPageComponent {
   constructor( private countriesService: CountriesService ) {}
 
   searchByCapital (term: string):void{
-    console.log('Desde ByCapitalPage')
-    console.log({term})
+    // console.log('Desde ByCapitalPage')
+    // console.log({term})
 
     this.countriesService.searchCapital( term )
     // debemos suscribirmos para que la petición se ejecute, sino usamos el .subscribe, simplemente no hace esa peticion
