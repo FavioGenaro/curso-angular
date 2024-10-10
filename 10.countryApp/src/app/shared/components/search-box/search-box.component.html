@@ -1,0 +1,10 @@
+<!-- #txtInput: Es el selector para el elemento html 
+    keyup.enter: Cuando el usuario termine de presionar enter, se ejecuta el emitValue
+-->
+<input
+    type="text"
+    class="form-control"
+    [placeholder]="placeholder"
+    (keyup.enter)="emitValue(txtInput.value)"
+    #txtInput
+>
