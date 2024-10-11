@@ -1,22 +1,44 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { catchError, Observable, of, map, delay } from 'rxjs';
+import { catchError, Observable, of, map, delay, tap } from 'rxjs';
 
 import { Country } from '../interfaces/country';
+import { CacheStore } from '../interfaces/cache-store.interface';
+import { Region } from '../interfaces/region.type';
 
 @Injectable({ providedIn: 'root' })
 export class CountriesService {
 
     private apiUrl: string = 'https://restcountries.com/v3.1'
 
-    constructor(private http: HttpClient ) { }
+    public cacheStore: CacheStore = {
+        byCapital:   { term: '', countries: [] }, // guardamos el termino de busqueda y el arreglo de countries
+        byCountries: { term: '', countries: [] },
+        byRegion:    { region: '', countries: [] },
+    }
+
+    constructor(private http: HttpClient ) {
+        this.loadFromLocalStorage(); // se ejecuta cuando se inicializa el servicio, no usamos el ngOnInit porque este service no es un componente
+    }
+
+    // guardamos en el localstorage
+    private saveToLocalStorage() {
+        localStorage.setItem( 'cacheStore', JSON.stringify( this.cacheStore ));
+    }
+    // cargamos los valores desde localstorage
+    private loadFromLocalStorage() {
+        if ( !localStorage.getItem('cacheStore') ) return;
+
+        this.cacheStore = JSON.parse( localStorage.getItem('cacheStore')! );
+    }
+
 
     // Metodo que realiza peticiones a una url y retorna un Country[]
     private getCountriesRequest( url: string ): Observable<Country[]> {
         return this.http.get<Country[]>( url )
             .pipe( // pipe recibe varios operadores RxJS que necesitemos
                 catchError( () => of([]) ),
-                delay( 2000 ), // agregamos un tiempo adicional para agregar un loading
+                // delay( 2000 ), // agregamos un tiempo adicional para agregar un loading
             );
     }
 
@@ -38,17 +60,30 @@ export class CountriesService {
     searchCapital( term: string ): Observable<Country[]> {
         const url = `${ this.apiUrl }/capital/${ term }`; // url para la petición
         return this.getCountriesRequest(url)
+            .pipe(
+                // cuando venga un nuevo mensaje del observable permite ejecutar funciones sin afectar el valor retornado del observable
+                tap(countries => this.cacheStore.byCapital = { term, countries }), // guardamos los datos
+                tap( () => this.saveToLocalStorage() ),
+            )
     }
 
     searchCountry( term: string ): Observable<Country[]> {
         const url = `${ this.apiUrl }/name/${ term }`;
         return this.getCountriesRequest(url)
+        .pipe(
+            tap(countries => this.cacheStore.byCountries= { term, countries }),
+            tap( () => this.saveToLocalStorage() ),
+        )
     }
 
     // Continentes
-    searchRegion( term: string ): Observable<Country[]> {
-        const url = `${ this.apiUrl }/region/${ term }`;
+    searchRegion( region: Region): Observable<Country[]> {
+        const url = `${ this.apiUrl }/region/${ region }`;
         return this.getCountriesRequest(url)
+        .pipe(
+            tap(countries => this.cacheStore.byRegion = { region, countries }),
+            tap( () => this.saveToLocalStorage() ),
+        )
     }
 
 }
