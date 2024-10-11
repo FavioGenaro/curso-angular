@@ -1,0 +1,51 @@
+<h2>Países</h2>
+<hr>
+
+<ul class="list-group">
+
+    <!-- routerLink="": Indicamos la ruta a la que se tiene que mover cuando se haga click al elemento li -->
+    <!-- si colocamos el nombre entre corchetes [routerLink] podemos ver que el li no reconoce esa propiedad 
+        para ello debemos importar el RouterModule dentro de shared.module. No lo colocamos entre [] porque
+        sabemos que el valor que vamos a asignarle es un string "about".
+
+        [routerLinkActiveOptions]: lo colocamos entre [] porque le mandamos un objeto. Debemos tener coincidencia exacta,
+        es decir, en la ruta "" se debe activar el Home Page
+    -->
+    <!-- <li routerLink=""
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+        class="list-group-item">
+        Home Page
+    </li>
+
+    <li routerLink="about"
+        routerLinkActive="active"
+        class="list-group-item">
+        About Page
+    </li>
+
+    <li routerLink="contact"
+        routerLinkActive="active"
+        class="list-group-item">
+        Contact Page
+    </li> -->
+
+    <li routerLink="countries/by-capital"
+        routerLinkActive="active"
+        class="list-group-item">
+        Por capital
+    </li>
+
+    <li routerLink="countries/by-country"
+        routerLinkActive="active"
+        class="list-group-item">
+        Por país
+    </li>
+
+    <li routerLink="countries/by-region"
+        routerLinkActive="active"
+        class="list-group-item">
+        Por región
+    </li>
+
+</ul>
