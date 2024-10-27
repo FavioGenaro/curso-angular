@@ -14,8 +14,9 @@ export class MenuComponent {
     this.menuItems = [
       // configuramos las opciones del menú
       {
-        label: 'Pipes de Angular',
-        icon: 'pi pi-desktop',
+        label: 'Pipes de Angular', // nombre de la opción
+        icon: 'pi pi-desktop', // icono
+        // cada item puede tener subitems
         items: [
           {
             label: 'Textos y Fechas',

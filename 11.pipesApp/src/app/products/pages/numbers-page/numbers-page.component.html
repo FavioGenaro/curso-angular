@@ -1,0 +1,37 @@
+<p-panel header="Pipes númericos" class="p-1">
+    <!-- <h1>Pipes númericos</h1> -->
+    <p>
+        Pipes incluídos en Angular - Usualmente en el Common Module
+    </p>
+</p-panel>
+
+<div class="grid">
+    <div class="col-12 md:col-4">
+        <p-card header="Ventas Netas" subheader="del presente año">
+            <!-- pipe number (DecimalPipe), recibe la variable digitsInfo -->
+            <!-- Pedimos de 2 a 2 decimales (2 sí o sí), podemos pedir de 2-6 (se queda hasta el 4 que es la cantidad de decimales del número) -->
+            <!-- pero si colocamos 6-6, queremos 6 decimales si o sí, rellena con ceros, en este caso añade 2 decimales -->
+            {{ (totalSells + 1235 ) | number:'1.2-2' }}
+        </p-card>
+    </div>
+    
+    <div class="col-12 md:col-4">
+        <p-card header="Ventas Brutas" subheader="del presente año">
+            <!-- pipe currency, ayuda con los formatos de moneda -->
+            <!-- Recibe el currencyCode que puede ser HNL, USD(por defecto), PE -->
+            <!-- Display es la otra variable, que define como se muestra ese codigo, puede ser en simbolo $, S/. -->
+            <!-- Finalmente, recibe el valor de digitsInfo igual que pipe number -->
+            {{ totalSells | currency:'PE':'symbol-narrow':'1.4-4' }}
+            <br/>
+            {{ totalSells | currency:'CAD':'symbol-narrow':'1.4-4' }}
+        </p-card>
+    </div>
+    
+    <div class="col-12 md:col-4">
+        <p-card header="Ganancia porcentual" subheader="del presente año">
+            <!-- pipe percent, convierte el valor en porcentaje -->
+            <!-- Recibe el valor de digitsInfo igual que pipe number -->
+            {{ percent | percent: '1.2-2' }}
+        </p-card>
+    </div>
+</div>
