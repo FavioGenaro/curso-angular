@@ -1,0 +1,115 @@
+<p-panel header="Pipes no tan comunes" class="p-1">
+    <p>
+        Pipes incluídos en Angular - Usualmente en el Common Module
+    </p>
+</p-panel>
+
+<div class="grid">
+
+    <div class="col-12 md:col-6">
+        <!-- i18nSelect palabras de internacionalización -->
+        <!-- [toggleable], permite desplegar o no el elemento -->
+        <p-fieldset legend="i18nSelect Pipe" [toggleable]="true">
+            <p>
+                Saludos {{ name }}, es un placer
+                <!-- i18nSelect espera a que le pasemos un Map, que es un objeto -->
+                <!-- ayuda a reemplazar valores por otros como en este caso palabras que dependan del sexo de una persona -->
+                {{ gender | i18nSelect:invitationMap }}
+                a nuestro evento.
+            </p>
+            <p-button
+                (click)="changeClient()"
+                label="Cambiar persona"
+            ></p-button>
+        </p-fieldset>
+    </div>
+
+    <div class="col-12 md:col-6">
+        <p-fieldset legend="i18nPlural Pipe" [toggleable]="true">
+            <p>
+                <!-- i18nPlural tambien espera un map, pero el valor anterior es un número (clients.length) -->
+                Actualmente {{ clients.length | i18nPlural:clientsMap }}
+            </p>
+            <p-button
+                (click)="deleteClient()"
+                label="Borrar cliente">
+            </p-button>
+        </p-fieldset>
+    </div>
+    
+    <div class="col-12 md:col-6">
+        <p-fieldset legend="Slice Pipe" [toggleable]="true">
+            <b>Original</b>
+            <pre>{{ clients }}</pre>
+        
+            <!-- Podemos cortar una variable, para string y arreglos
+                empiza desde el 0 al 2, coge los valores 0 y 1 del arreglo o string, sin incluir el 2
+            -->
+            <b>slice:0:2</b>
+            <pre>{{ clients | slice:0:2 }}</pre>
+        
+            <b>slice:1:2</b>
+            <pre>{{ clients | slice:1:2 }}</pre>
+        
+            <b>slice:1:3</b>
+            <pre>{{ clients | slice:1:3 }}</pre>
+        
+            <b>slice:3:4</b>
+            <pre>{{ clients | slice:3:4 }}</pre>
+        
+            <!-- -3 hace que elimine del ultimo elemento hacia adelante, 
+                -1 seria menos el ultimo, -2 menos ultimo y penultimo
+            -->
+            <b>slice:0:-3</b>
+            <pre>{{ clients | slice:0:-3 }}</pre>
+        </p-fieldset>
+    </div>
+    
+    <!-- Json Pipe -->
+    <div class="col-12 md:col-6">
+        <p-fieldset legend="Json Pipe" [toggleable]="true">
+            <!-- person al ser un objeto se muestra como [object][object], pero con json se muestra su valor -->
+            <pre>{{ person | json }}</pre>
+        </p-fieldset>
+    </div>
+    
+    <!-- KeyValue Pipe  -->
+    <div class="col-12 md:col-6">
+        <p-fieldset legend="KeyValue Pipe" [toggleable]="true">
+            <!-- KeyValue, permite barrer un arreglo como si fuera un arreglo -->
+            <ul>
+                <!-- keyvalue lo transforma en un arreglo, ordenado alfabeticamente, que permite que sea iterable -->
+                <li *ngFor="let item of person | keyvalue">
+                    <!-- item.key es el nombre del la propiedad y el item.value el valor -->
+                    <b>{{ item.key | titlecase }}:</b> {{ item.value }}
+                </li>
+            </ul>
+        </p-fieldset>
+    </div>
+    
+    <!-- Async Pip -->
+    <div class="col-12 md:col-6">
+        <!-- permite limpiar el resultado de una operación asincrona que se va a destruir
+            es como si tenemos un suscribe y unsuscribe de una petición. 
+            Trabaja con Observables y promises, detectando si estamos usando uno
+        -->
+        <p-fieldset legend="Async Pipe" [toggleable]="true">
+            <!-- async: se suscribe y escucha las emisiones del observable y cambia los valores segun eso.
+                Automaticamente limpia la suscrición y se dejan de emitir valores cuando cambiamos de pantalla
+                porque se destruye el componente.
+            -->
+            <!-- mientras myObservableTimer no emita un valor se muestra el "Resolviendo observable" -->
+            <!-- cada uso de myObservableTimer es una suscripción nueva -->
+            <pre *ngIf="!(myObservableTimer | async)">Resolviendo observable</pre>
+            <pre>{{ myObservableTimer | async }}</pre>
+            <!-- json se suscribe por una sola vez (suscripcion independiente), 
+            así que toma el primer valor y no lo escucha -->
+            <pre>{{ myObservableTimer | json }}</pre>
+        
+            <!-- Con una promesa, la promesa no se puede cancelar, se ejecutará a pesar de cambiar de pantalla y 
+            el componente se destruya, pero no recibiremos un error por eso. -->
+            <pre *ngIf="!(promiseValue | async)">Resolviendo promesa</pre>
+            <pre>{{ promiseValue | async }}</pre>
+        </p-fieldset>
+    </div>
+</div>

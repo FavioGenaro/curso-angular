@@ -1,0 +1,85 @@
+<!-- showHeader: No mostramos los header -->
+<!--  [showHeader]="false" -->
+<p-panel header="Pipes básicos" class="p-1">
+    <h1>Pipes básicos</h1>
+    <p>
+        Pipes incluídos en Angular - Usualmente en el Common Module
+    </p>
+</p-panel>
+
+<div class="grid">
+
+    <!-- modo normal o pequeño con col-12, en pantallas medianas para arriba con col-4 -->
+    <!-- El tamaño total de la pantalla es 12 -->
+    <div class="col-12 md:col-4">
+        <!-- nombre de la card es uppercase -->
+        <p-card header="uppercase">
+            <!-- usamos los pipes -->
+            {{ nameLower | uppercase }}
+        </p-card>
+    </div>
+
+    <div class="col-12 md:col-4">
+        <p-card header="lowercase">
+            {{ nameUpper | lowercase }}
+        </p-card>
+    </div>
+
+    <div class="col-12 md:col-4">
+        <p-card header="titlecase">
+            {{ fullName | titlecase }}
+        </p-card>
+    </div>
+
+    <!-- DATEPIPE -->
+    <div class="col-12 md:col-6">
+        <!-- Un card tiene lo que se aplica y el otro los resultados -->
+        <p-card header="titlecase">
+            <ol>
+                <li> fecha </li>
+                <li> fecha | date </li>
+                <li> fecha | date:'short' </li>
+                <li> fecha | date:'long' </li>
+                <li> fecha | date:'MMMM' </li>
+                <li> fecha | date:'MMMM dd, yyyy' </li>
+            </ol>
+        
+            <hr>
+            <ol>
+                <li> fecha | date:'long':'GMT-6' </li>
+                <li> fecha | date:'long':'GMT-4' </li>
+                <li> fecha | date:'long':'':'es-HN' </li>
+                <li> fecha | date:'long':'':'en-US' </li>
+                <li> fecha | date:'long':'':'fr-CA' </li>
+                <li> fecha | date:'long':'':'es-PE' </li>
+            </ol>
+        </p-card>
+    </div>
+
+    <div class="col-12 md:col-6">
+        <p-card header="titlecase">
+            <ol>
+                <li> {{ customDate }} </li>
+                <li> {{ customDate | date }} </li>
+                <!-- short esta en forma ingles de igual forma que otras propiedades -->
+                <li> {{ customDate | date:'short' }} </li>
+                <li> {{ customDate | date:'long' }} </li>
+                <!-- MMMM: Coloca el nombre del mes -->
+                <li> {{ customDate | date:'MMMM' }} </li>
+                <li> {{ customDate | date:'MMMM dd, yyyy' }} </li>
+            </ol>
+            <hr>
+            <ol>
+                <!-- Estas fecha tiene configuración de zona horaria (timezone), que es la siguiente variable que nos deja colocar -->
+                <li> {{ customDate | date:'long':'GMT-6' }} </li>
+                <li> {{ customDate | date:'long':'GMT-4' }} </li>
+                <!-- podemos dejar el timezone vacio (usa el que esta por defecto) y luego colocar el locale (configurar el idioma) -->
+                <!-- es-HN es el español de honduras, es-PE es el español de perú, por defecto es en-US (ingles de Estados Unidos) -->
+                <li> {{ customDate | date:'long':'':'es-HN' }} </li>
+                <li> {{ customDate | date:'long':'':'en-US' }} </li>
+                <li> {{ customDate | date:'long':'':'fr-CA' }} </li>
+                <li> {{ customDate | date:'long':'':'es-PE' }} </li>
+            </ol>
+        </p-card>
+    </div>
+</div>
