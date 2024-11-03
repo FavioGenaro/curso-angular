@@ -1,7 +1,7 @@
 <p-panel header="Pipes Personalizados" class="p-1">
     <!-- <h1>Pipes básicos</h1> -->
     <p>
-        Pipes Personalizados - Creados por {{'nosotros' | toggleCase:true}}
+        Pipes Personalizados - Creados por {{'nosotros' | toggleCase:isUpperCase}}
     </p>
 </p-panel>
 <p-toolbar>
@@ -9,40 +9,46 @@
         <p-button
             label="ToogleCase"
             icon="pi pi-search"
+            (click)="toggleUpperCase()"
         ></p-button>
-            <!-- (click)="toggleUpperCase()" -->
+        <!-- podemos usar onClick que es propio de prime ng o solo click que es angular nativo 
+            aunque primeng tiene eventos personalizados para cada componente que pueden servir
+        -->
     </div>
 
     <div class="p-toolbar-group-end">
 
-        <!-- (onClick)="changeOrder('name')" -->
         <p-button class="mr-2"
-                label="Por nombre"
-                icon="pi pi-sort"
-                styleClass="p-button-success">
+            label="Por nombre"
+            icon="pi pi-sort"
+            (onClick)="changeOrder('name')"
+            styleClass="p-button-success">
         </p-button>
 
-        <!-- (onClick)="changeOrder('canFly')" -->
         <p-button class="mr-2"
-                label="Por volar"
-                icon="pi pi-sort"
+            label="Por volar"
+            icon="pi pi-sort"
+            (onClick)="changeOrder('canFly')"
                 styleClass="p-button-danger">
         </p-button>
 
-        <!-- (onClick)="changeOrder('color')" -->
         <p-button class="mr-2"
-                label="Por color"
-                icon="pi pi-sort"
-                styleClass="p-button-help">
+            label="Por color"
+            icon="pi pi-sort"
+            (onClick)="changeOrder('color')"
+            styleClass="p-button-help">
         </p-button>
     </div>
 </p-toolbar>
 
-<!-- 
+
 <div class="grid">
     <div class="col mt-2">
         <p-panel header="Héroes">
-            <p-table [value]="heroes | sortBy:orderBy" [tableStyle]="{'min-width': '50rem'}">
+            
+            <!-- heroes: Es el arreglo de heroes -->
+            <!-- | sortBy:orderBy -->
+            <p-table [value]="heroes| sortBy:orderBy" [tableStyle]="{'min-width': '50rem'}">
                 <ng-template pTemplate="header">
                     <tr>
                         <th>Nombre</th>
@@ -50,6 +56,7 @@
                         <th>Color</th>
                     </tr>
                 </ng-template>
+                <!-- iteramos de forma distinta, con let-hero obtenemos las propiedades de un hero -->
                 <ng-template pTemplate="body" let-hero>
                     <tr>
                         <td>{{ hero.name }}</td>
@@ -59,6 +66,5 @@
                 </ng-template>
             </p-table>
         </p-panel>
-
     </div>
-</div> -->
+</div>
