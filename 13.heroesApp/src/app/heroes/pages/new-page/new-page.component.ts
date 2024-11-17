@@ -6,5 +6,9 @@ import { Component } from '@angular/core';
   styles: ``
 })
 export class NewPageComponent {
-
+  // Opciones para la lista desplegable
+  public publishers = [
+    { id: 'DC Comics', desc: 'DC - Comics' },
+    { id: 'Marvel Comics', desc: 'Marvel - Comics' },
+  ];
 }

@@ -1,1 +1,27 @@
-<p>login-page works!</p>
+<!-- Armamos el Login -->
+<div class="flex flex-column">
+
+    <span class="text-lg mb-4">Login</span>
+
+    <!-- Cualquier componente que empiece con mat, es de Angular Material -->
+    <mat-form-field>
+        <mat-label>Usuario</mat-label>
+        <!-- matInput hace que el input sea de Angular Materia, es una directiva personalizada -->
+        <input type="text" matInput placeholder="Nombre de usuario">
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>Contraseña</mat-label>
+        <input type="password" matInput placeholder="Contraseña">
+    </mat-form-field>
+
+    <button mat-button mat-flat-button color="primary">
+        <!-- en el componente mat-icon debemos colocar el nombre del icono que queremos -->
+        <mat-icon>save</mat-icon>
+        Ingresar
+    </button>
+    <!-- para redirigir a la pagina de registro -->
+    <div class="flex justify-content-end mt-5">
+        <a routerLink="/auth/new-account">¿Ya tienes cuenta?</a>
+    </div>
+</div>
