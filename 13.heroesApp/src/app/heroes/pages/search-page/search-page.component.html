@@ -1,1 +1,47 @@
-<p>search-page works!</p>
+<div class="flex flex-column p-2">
+
+    <h3>Buscador</h3>
+
+    <mat-form-field>
+        <mat-label>Buscador de héroes</mat-label>
+        <!-- para usar FormControl debemos importar ReactiveFormsModule -->
+        <!-- searchHero() se ejecuta cuando escribe -->
+        <input
+            type="text"
+            matInput
+            [formControl]="searchInput"
+            (input)="searchHero()"
+            [matAutocomplete]="auto"
+        />
+        <!-- matAutocomplete es a que elemento va a apuntar, que tiene todo lo necesario.
+            matAutocomplete este en el input, que tiene el valor del auto.
+        -->
+        <!-- Cuando seleccionamos una opcion aparece object,object 
+            para eso usamos el evento optionSelected que representa a la selección de una opción
+        -->
+        <mat-autocomplete 
+            autoActiveFirstOption
+            #auto="matAutocomplete"
+            (optionSelected)="onSelectedOption( $event )"
+        >
+            <!-- Mostramos las opciones -->
+            <mat-option *ngFor="let hero of heroes" [value]="hero">
+                {{ hero.superhero }}
+            </mat-option>
+            
+            <!-- En caso no se encuentra el termino de busqueda
+                se muestra si el arreglo de heroes es vacio o si el buscador tiene contenido
+            -->
+            <mat-option
+                *ngIf="heroes.length === 0 && searchInput.value && searchInput.value.length > 0"
+                value="">
+                No se encontró nada con el término {{ searchInput.value }}
+            </mat-option>
+        </mat-autocomplete>
+
+    </mat-form-field>
+    {{ selectedHero | json }}
+
+    <!-- Podemos tener varias propiedades del input, tenemos mucho control -->
+    <!-- {{ searchInput.value| json }} -->
+</div>
