@@ -2,7 +2,7 @@
   "users": [
     {
       "id": "1",
-      "usuario": "John Doe",
+      "user": "John Doe",
       "email": "john.due@gmail.com"
     }
   ],
@@ -34,11 +34,10 @@
     {
       "id": "dc-green",
       "superhero": "Green Lantern",
-      "publisher": "Marvel Comics",
+      "publisher": "DC Comics",
       "alter_ego": "Alan Scott",
       "first_appearance": "All-American Comics #16",
-      "characters": "Alan Scott, Hal Jordan, Guy Gardner, John Stewart, Kyle Raynor, Jade, Sinestro, Simon Baz",
-      "alt_img": null
+      "characters": "Alan Scott, Hal Jordan, Guy Gardner, John Stewart, Kyle Raynor, Jade, Sinestro, Simon Baz"
     },
     {
       "id": "dc-arrow",
@@ -150,8 +149,7 @@
       "publisher": "Marvel Comics",
       "alter_ego": "Clinton Francis Barton",
       "first_appearance": "Tales of Suspense #57",
-      "characters": "Clinton Francis Barton",
-      "alt_img": "https://i1.whakoom.com/large/20/2e/862e383c758540059d160a775887109b.jpg"
+      "characters": "Clinton Francis Barton"
     },
     {
       "id": "marvel-cyclops",
