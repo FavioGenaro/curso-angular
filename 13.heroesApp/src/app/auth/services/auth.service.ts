@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environments } from '../../../environments/environments';
 import { User } from '../interfaces/user.interface';
-import { Observable, tap } from 'rxjs';
+import { catchError, map, Observable, of, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -27,6 +27,22 @@ export class AuthService {
         tap( user => this.user = user ), // asignamos el valor obtenido al user y este valor se retornar al sgt tap
         // user.id.toString()
         tap( user => localStorage.setItem('token', 'aASDgjhasda.asdasd.aadsf123k' )), // guardamos en el localstorage, debería ser el token pero provisionalmente guardamos el id
+      );
+  }
+
+  // revisa la sesión en el localstorage
+  checkAuthentication(): Observable<boolean> {
+
+    if ( !localStorage.getItem('token') ) return of(false);
+
+    const token = localStorage.getItem('token'); // obtenemos el token
+
+    return this.http.get<User>(`${ this.baseUrl }/users/1`)
+      .pipe(
+        // asignamos el usuario, se debería verificar que existe
+        tap( user => this.user = user ),
+        map( user => !!user ), // el ! indica que no hay valor y retorna false y el !! niega el false, así que retorna true.
+        catchError( err => of(false) ) // en caso el user 1 no exista o por cualquier otro error, retorna false.
       );
   }
 
