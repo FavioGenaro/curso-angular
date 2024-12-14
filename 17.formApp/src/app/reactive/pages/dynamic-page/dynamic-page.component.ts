@@ -77,7 +77,7 @@ export class DynamicPageComponent {
     // this.favoriteGames.push(  new FormControl( newGame, Validators.required ) );
     // favoriteGames es el get, que retorna un FormArray, así que podemos agregar un FormArray
     this.favoriteGames.push(
-      // forma de agregarlo con el FormBuilder
+      // forma de agregarlo con el FormBuilder, this.fb.control retorna un FormControl
       this.fb.control( newGame, Validators.required )
     );
 
@@ -96,7 +96,7 @@ export class DynamicPageComponent {
     console.log(this.myForm.value); // mopstramos
     // al hacer submit vaciamos el FormArray, porque el reset solo elimina el contenido de los FormControl,
     // pero no elimina elementos del FormArray. Los hacemos usando el FormBuilder
-    (this.myForm.controls['favoriteGames'] as FormArray ) = this.fb.array([]);
+    (this.myForm.controls['favoriteGames'] as FormArray ) = this.fb.array([]); // this.fb.array([]): retorna una instancia de FormArray vacía.
     // resetamos el formulario
     this.myForm.reset();
   }
