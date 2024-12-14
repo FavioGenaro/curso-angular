@@ -1,0 +1,107 @@
+<h2>Reactivos: Básicos</h2>
+<hr>
+
+<div class="row">
+    <div class="col">
+        <!-- en off, indica al nevagador que nosotros colocaremos las validaciones -->
+        <!-- formGroup enlazamos el objeto myForm -->
+        <form [formGroup]="myForm" autocomplete="off" (ngSubmit)="onSave()">
+
+            <!-- Campo de producto -->
+            <div class="mb-3 row">
+                <label class="col-sm-3 col-form-label">Producto</label>
+                <div class="col-sm-9">
+                    <!-- con formControlName enlazamos el formcontrol delformGroup  -->
+                    <input type="text"
+                        formControlName="name"
+                        class="form-control"
+                        placeholder="Nombre del producto">
+
+                    <!-- Validaciones para el nombre -->
+                    <span *ngIf="isValidField('name')"
+                        class="form-text text-danger">
+                        {{ getFieldError('name') }}
+                    </span>
+                </div>
+            </div>
+
+            <!-- Campo de producto -->
+            <div class="mb-3 row">
+                <label class="col-sm-3 col-form-label">Precio</label>
+                <div class="col-sm-9">
+                    <input type="number"
+                        formControlName="price"
+                        class="form-control"
+                        placeholder="Precio del producto">
+
+                    <!-- Para el precio no usamos el getFieldError, porque tenemos solo un mensaje de validacion -->
+                    <span *ngIf="isValidField('price')" class="form-text text-danger">
+                        El precio debe de ser 0 o mayor
+                    </span>
+                </div>
+            </div>
+
+            <!-- Campo de existencias -->
+            <div class="mb-3 row">
+                <label class="col-sm-3 col-form-label">Existencias</label>
+                <div class="col-sm-9">
+                    <input type="number"
+                        formControlName="inStorage"
+                        class="form-control"
+                        placeholder="Existencias del producto">
+
+                    <!-- Para el precio no usamos el getFieldError, porque tenemos solo un mensaje de validacion -->
+                    <span *ngIf="isValidField('inStorage')" class="form-text text-danger">
+                        Las existencias deben de ser 0 o mayor
+                    </span>
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="col">
+                    <button type="submit"
+                            class="btn btn-primary float-end">
+                        Guardar
+                    </button>
+                </div>
+            </div>
+        </form>
+
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col">
+
+        <span>Valid</span>
+        <!-- Validez del formulrio -->
+        <pre>{{ myForm.valid | json }}</pre>
+
+        <span>Pristine</span>
+        <!-- Indica si el formulario sea tocado o manipulado de alguna manera. True si no se toco y false si sí -->
+        <pre>{{ myForm.pristine| json }}</pre>
+
+        <span>Touched</span>
+        <!-- true si el formulario ha sido tocado y false sino lo ha sido, si lo tocamos una vez este aparece en true -->
+        <pre>{{ myForm.touched| json }}</pre>
+
+        <span>Value</span>
+        <!-- Valor de cada campo del formulario -->
+        <pre>{{ myForm.value| json }}</pre>
+
+        <span>Precio</span>
+        <pre>{{ myForm.controls['price'].value | json }}</pre>
+
+        <span>Precio - Errors</span>
+        <!-- Si no tenemos ningun error, este retorna null -->
+        <pre>{{ myForm.controls['price'].errors | json }}</pre>
+
+        <span>Producto</span>
+        <pre>{{ myForm.controls['name'].value | json }}</pre>
+
+        <span>Producto</span>
+        <pre>{{ myForm.controls['name'].errors | json }}</pre>
+    </div>
+</div>
