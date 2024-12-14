@@ -1,16 +1,20 @@
 <h2>Reactivos: <small> Dinámicos </small></h2>
 <hr>
 
-<form autocomplete="off">
+<!-- Vimculamos el formGroup -->
+<form [formGroup]="myForm" (ngSubmit)="onSubmit()"  autocomplete="off">
 
     <!-- Nombre -->
     <div class="mb-3 row">
         <label class="col-sm-3 col-form-label">Nombre</label>
         <div class="col-sm-9">
+            <!-- Con el formControlName enlazamos el input -->
             <input class="form-control"
-                   placeholder="Nombre de la persona">
-            <span class="form-text text-danger">
-                   error message
+                formControlName="name"
+                placeholder="Nombre de la persona">
+            <!-- Mensaje de error -->
+            <span *ngIf="isValidField('name')" class="form-text text-danger">
+                {{ getFieldError('name') }}
             </span>
         </div>
     </div>
@@ -22,10 +26,12 @@
 
             <div class="input-group">
                 <input class="form-control"
-                       placeholder="Agregar favorito">
+                    [formControl]="newFavorite"
+                    placeholder="Agregar favorito">
 
 
                 <button class="btn btn-outline-primary"
+                        (click)="onAddToFavorites()"
                         type="button">
                     Agregar favorito
                 </button>
@@ -33,32 +39,36 @@
         </div>
     </div>
 
-
     <!-- Lista de Juegos Favoritos -->
     <div class="mb-3 row">
         <label class="col-sm-3 col-form-label">Favoritos</label>
-        <div class="col-sm-9">
-
-            <div class="mb-1">
+        <!-- formArrayName contiene el arreglo de FormControls -->
+        <div class="col-sm-9" formArrayName="favoriteGames">
+            <!-- Este div es un FormControl, se generan tantos como hayan en el arreglo-->
+            <!-- favoriteGames es un get, retorna un FormArray, y el arreglo de controls estan en la propiedad controls-->
+            <div class="mb-1" *ngFor="let favorite of favoriteGames.controls; let i = index">
 
                 <div class="input-group">
-                    <input class="form-control">
-
+                    <!-- en base al indice se vincula el formControl -->
+                    <input class="form-control"
+                        [formControlName]="i"
+                    >
                     <button class="btn btn-outline-danger"
+                            (click)="onDeleteFavorite( i )"
                             type="button">
-                      Eliminar
-                  </button>
+                        Eliminar
+                    </button>
                 </div>
-                <span class="form-text text-danger">
-                   Este campo es requerido
+                <!-- Mensaje de error, 
+                    isValidFieldInArray recibe el FormArray y el indice, valida si el FormControl tiene un error
+                    no usamos el getFieldError, porque tenemos una validación 
+                -->
+                <span *ngIf="isValidFieldInArray(favoriteGames, i)" class="form-text text-danger">
+                    Este campo es requerido
                 </span>
-
             </div>
-
         </div>
     </div>
-
-
 
     <div class="row">
         <div class="col-sm-12">
@@ -70,20 +80,16 @@
             </button>
         </div>
     </div>
-
-
 </form>
 
-
-
 <span>Valid</span>
-<pre>{{ 'object' | json }}</pre>
+<pre>{{ myForm.valid| json }}</pre>
 <br>
 
 <span>Value</span>
-<pre>{{ 'object' | json }}</pre>
+<pre>{{ myForm.value | json }}</pre>
 <br>
 
 <span>Agregar Juego</span>
-<pre>{{ 'object' | json }}</pre>
-<pre>{{ 'object' | json }}</pre>
+<pre>{{ newFavorite.valid | json }}</pre>
+<pre>{{ newFavorite.value | json }}</pre>
