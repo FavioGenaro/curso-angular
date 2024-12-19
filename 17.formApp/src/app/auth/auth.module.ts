@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { AuthRoutingModule } from './auth-routing.module';
 import { RegiterPageComponent } from './pages/regiter-page/regiter-page.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -11,7 +12,8 @@ import { RegiterPageComponent } from './pages/regiter-page/regiter-page.componen
   ],
   imports: [
     CommonModule,
-    AuthRoutingModule
+    AuthRoutingModule,
+    ReactiveFormsModule // para las directivas en el html
   ]
 })
 export class AuthModule { }
