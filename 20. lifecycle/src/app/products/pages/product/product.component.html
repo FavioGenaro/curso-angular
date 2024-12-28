@@ -1,0 +1,16 @@
+<p>product works!</p>
+
+<!-- le pasamos la propiedad price al hijo, este se muestra segun el boton Toggle -->
+<products-price
+    *ngIf="isProductVisible"
+    [price]="currentPrice"
+></products-price>
+
+<button (click)="isProductVisible = !isProductVisible">
+    Toggle
+</button>
+
+<!-- Modifica la propiedad price que le pasamos al hijo -->
+<button (click)="increasePrice()">
+    +1 Price
+</button>
