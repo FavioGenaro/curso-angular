@@ -7,6 +7,12 @@ interface MarkerAndColor {
   marker: Marker; // marker
 }
 
+// Esta interfaz es para guardarlos en localstorage, del marker solo necesitamos el lngLat, de por si el objeto marker es muy grande
+interface PlainMarker {
+  color: string;
+  lngLat: number[]
+}
+
 @Component({
   selector: 'maps-markers',
   templateUrl: './markers-page.component.html',
@@ -30,6 +36,9 @@ export class MarkersPageComponent implements AfterViewInit {
       center: this.currentLngLat,
       zoom: 13
     });
+
+    // debemos obtener la lista de marcadores al inicializarse el mapa
+    this.readFromLocalStorage();
 
     // Creamos html, este hace de marcador
     // const markerHtml = document.createElement('div');
@@ -69,11 +78,13 @@ export class MarkersPageComponent implements AfterViewInit {
       .addTo( this.map );
 
     this.markers.push({ color, marker, }); // Agregamos al arreglo
-    // this.saveToLocalStorage();
 
-    // marker.on('dragend', () => this.saveToLocalStorage() );
+    // Guardamos el localstorage
+    this.saveToLocalStorage();
 
-    // dragend
+    // escuchamos el evento de movimiento de cualquiera de los marcadores, este recibe de entrada el marker seleccionado
+    // pero no usaremos el marker seleccionado, sino que llamamos a saveToLocalStorage() para actualizar su ubicación
+    marker.on('dragend', () => this.saveToLocalStorage() );
   }
 
   // recibe el indice dentro del arreglo
@@ -84,11 +95,42 @@ export class MarkersPageComponent implements AfterViewInit {
 
   // recibimos el market, pero podemos recibir solo la ubicación long y latitud
   flyTo( marker: Marker ) {
-    // nevagamos a las coordenadas del marker
+    // navegamos a las coordenadas del marker
     this.map?.flyTo({
       zoom: 14, // podemos modificar el zoom
       center: marker.getLngLat()
     });
   }
 
+  // Guardar en el localstorage
+  saveToLocalStorage() {
+    // en base a los markers realizamos un arreglo de PlainMarker
+    const plainMarkers: PlainMarker[] = this.markers.map( ({ color, marker }) => {
+      return {
+        color,
+        lngLat: marker.getLngLat().toArray() // longitud y latitud como un arreglo
+      }
+    });
+    // Guardamos en el localstorage
+    localStorage.setItem('plainMarkers', JSON.stringify( plainMarkers ));
+
+  }
+
+  // Obtener los marcadores desde el localstorage
+  readFromLocalStorage() {
+    // obtememos el string del localstorage
+    const plainMarkersString = localStorage.getItem('plainMarkers') ?? '[]';
+    // reconstruimos el arreglo de PlainMarker con JSON.parse, 
+    // pero puede ser inseguro tomar un string y convertirlo en objeto, puede fallar si no tiene las propiedades de la interfaz
+    const plainMarkers: PlainMarker[] = JSON.parse( plainMarkersString ); //! OJO!
+
+    // Iteramos el arreglo y generamos cada marker con el addMarker
+    plainMarkers.forEach( ({ color, lngLat }) => {
+      const [ lng, lat ] = lngLat; // destructuramos el arreglo
+      const coords = new LngLat( lng, lat ); // creamos el objeto LngLat
+
+      this.addMarker( coords, color );
+    })
+
+  }
 }
