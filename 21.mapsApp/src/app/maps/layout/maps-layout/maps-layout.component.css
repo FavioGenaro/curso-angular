@@ -1,6 +1,6 @@
 
 /* Podemos usar etiquetas de los componentes dentro de css */
-maps-side-menu {
+side-menu {
     position: fixed;
     top: 20px;
     left: 20px;
