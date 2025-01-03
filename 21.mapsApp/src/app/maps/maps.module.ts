@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 
 import { MapsRoutingModule } from './maps-routing.module';
 import { MiniMapComponent } from './components/mini-map/mini-map.component';
-import { SideMenuComponent } from './components/side-menu/side-menu.component';
 import { MapsLayoutComponent } from './layout/maps-layout/maps-layout.component';
 import { FullScreenPageComponent } from './pages/full-screen-page/full-screen-page.component';
 import { MarkersPageComponent } from './pages/markers-page/markers-page.component';
@@ -12,22 +11,26 @@ import { ZoomRangePageComponent } from './pages/zoom-range-page/zoom-range-page.
 
 import mapboxgl from 'mapbox-gl';
 import { environment } from '../../environments/environment';
+import { CounterAloneComponent } from '../alone/components/counter-alone/counter-alone.component';
+import { SideMenuComponent } from '../alone/components/side-menu/side-menu.component';
 
 mapboxgl.accessToken = environment.mapbox_key;
 
 @NgModule({
   declarations: [
     MiniMapComponent,
-    SideMenuComponent,
+    // SideMenuComponent,
     MapsLayoutComponent,
     FullScreenPageComponent,
     MarkersPageComponent,
     PropertiesPageComponent,
-    ZoomRangePageComponent
+    ZoomRangePageComponent,
   ],
   imports: [
     CommonModule,
-    MapsRoutingModule
+    MapsRoutingModule,
+    CounterAloneComponent, // importamos el standalone component
+    SideMenuComponent // side menu ahora es un standalone component
   ]
 })
 export class MapsModule { }
