@@ -7,19 +7,20 @@ import { CounterPageComponent } from './pages/counter-page/counter-page.componen
 import { UserInfoPageComponent } from './pages/user-info-page/user-info-page.component';
 import { PropertiesPageComponent } from './pages/properties-page/properties-page.component';
 import { SideMenuComponent } from './components/side-menu/side-menu.component';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
   declarations: [
-  
     SignalsLayoutComponent,
-       CounterPageComponent,
-       UserInfoPageComponent,
-       PropertiesPageComponent,
-       SideMenuComponent
+    CounterPageComponent,
+    UserInfoPageComponent,
+    PropertiesPageComponent,
+    SideMenuComponent
   ],
   imports: [
     CommonModule,
+    HttpClientModule,
     SignalsRoutingModule
   ]
 })
