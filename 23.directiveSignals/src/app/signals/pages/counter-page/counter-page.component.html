@@ -1,0 +1,14 @@
+<!-- counter() es el valor de la señal counter -->
+<h1>Counter: {{ counter() }}</h1>
+<hr>
+<!-- contador al cuadrado squareCounter es la señal y squareCounter() el valor de la señal-->
+<h2>Square Counter {{ squareCounter() }}</h2>
+<hr>
+
+<!-- Para aumentar o disminuir valor usamos el método increaseBy -->
+<button (click)="increaseBy(+1)" class="btn btn-primary"> + 1 </button>
+&nbsp;
+<button (click)="increaseBy(-1)" class="btn btn-primary"> - 1 </button>
+&nbsp;
+<!-- Para restablecer el valor de la señal usamos set y el valor, en este caso es 0 -->
+<button (click)="counter.set(0)"  class="btn btn-primary"> Reset </button>
