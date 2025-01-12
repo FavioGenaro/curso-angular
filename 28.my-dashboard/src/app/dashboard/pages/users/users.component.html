@@ -1,1 +1,32 @@
-<p>users works!</p>
+<app-title title="Listado de usuarios" />
+
+<!-- @if ( !usersService.users() ) {
+
+} -->
+<ul>
+    <!-- Itertamos sobre la lista de usuario que viene en el servicio -->
+    @for (user of usersService.users(); track user.id) {
+        <li class="flex items-center my-2 cursor-pointer">
+
+            <img
+                [srcset]="user.avatar"
+                [alt]="user.first_name"
+                class="rounded w-14"
+            />
+
+            <a
+                [routerLink]="['/dashboard/user', user.id ]"
+                class="mx-5 hover:underline">
+                {{ user.first_name}} {{ user.last_name }}
+            </a>
+
+
+        </li>
+        <!-- En algun momento del tiempo el arreglo no tiene data, esta haciendo la petición, 
+        haci que podemos mostrar otros elementos -->
+        <!-- Se podria hacer con un if aparte, pero tenemos esta otra opción -->
+    } @empty {
+        <h3>Espere por favor</h3>
+    }
+
+</ul>
