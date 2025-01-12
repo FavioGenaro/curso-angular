@@ -1,0 +1,105 @@
+<app-title title="Defer Triggers" />
+
+<section>
+    <h1 class="text-xl">Interacciones</h1>
+    <hr class="my-2">
+    <!-- @defer: Primero se cargan los demas componentes y luego los de carga diferida o @defer. -->
+    <!-- interaction hace que el elemento se carga al hacer un click o keydown, el obligatorio el @placeholder -->
+    @defer (on interaction ) {
+        <app-heavy-loaders-fast cssClass="bg-blue-500 h-20">
+            <!-- Estos son los componentes que representan a <ng-content /> -->
+            <span>On Interaction</span>
+        </app-heavy-loaders-fast>
+    } @placeholder {
+        <div class="w-full h-20 bg-purple-100">
+            Click en el div
+        </div>
+    }
+</section>
+
+<section>
+    <hr class="my-2">
+    <!-- Boton para la interacción -->
+    <button
+        #btnInteraction
+        class="p-2 bg-blue-500 hover:bg-blue-700 transition-all rounded text-white my-2">
+        Click me!
+    </button>
+    <!-- La interación se dispara mediante otro elemento, con el click en el boton -->
+    @defer ( on interaction( btnInteraction ) ) {
+        <app-heavy-loaders-fast cssClass="bg-blue-500 h-20">
+            <span>On Interaction</span>
+        </app-heavy-loaders-fast>
+    } @placeholder {
+        <div class="w-full h-20 bg-purple-100">
+            Placeholder div
+        </div>
+    }
+</section>
+
+
+
+<section>
+    <hr class="my-2">
+    <!-- Aqui se realiza la carga del componente mediante el hover, tambien se puede agregar la referencia 
+        a otro elemento html para que cuando se pase hover a ese elemento se muestre este componente
+    -->
+    @defer ( on hover ) {
+        <app-heavy-loaders-fast cssClass="bg-blue-500 h-20">
+            <span>On Interaction</span>
+        </app-heavy-loaders-fast>
+    } @placeholder {
+        <div class="w-full h-20 bg-purple-100">
+            Placeholder div
+        </div>
+    }
+
+</section>
+
+<section>
+    <hr class="my-2">
+    <!-- immediate, tan pronto pueda que se cargue este componente. Se dispara tan pronto el cliente termina de 
+    renderizar la pantalla. -->
+    @defer ( on immediate ) {
+        <app-heavy-loaders-fast cssClass="bg-blue-500 h-20">
+            <span>On immediate</span>
+        </app-heavy-loaders-fast>
+    } @placeholder {
+        <div class="w-full h-20 bg-purple-100">
+            Placeholder div
+        </div>
+    }
+
+</section>
+
+<section>
+    <hr class="my-2">
+    <!-- A los 2 segundos (2000 milisegundos) se realiza la carga del componente -->
+    @defer ( on timer( 2000 ) ) {
+        <app-heavy-loaders-fast cssClass="bg-green-500 h-20">
+            <span>On Timer</span>
+        </app-heavy-loaders-fast>
+    } @placeholder {
+        <div class="w-full h-20 bg-purple-100">
+            2 Segundos
+        </div>
+    }
+
+</section>
+
+<section>
+    <hr class="my-2">
+    <!-- Podemos colocar varias condiciones
+        prefetch hace una pre carga del código que ejecuta los elementos dentro del defer
+    -->
+    @defer ( on hover; prefetch on idle  ) {
+        <app-heavy-loaders-fast cssClass="bg-green-500 h-20">
+            <span>On hover, idle</span>
+        </app-heavy-loaders-fast>
+    } @placeholder {
+        <div class="w-full h-20 bg-purple-100">
+            Hover
+        </div>
+    }
+
+</section>

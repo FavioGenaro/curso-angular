@@ -1,0 +1,39 @@
+<app-title title="Defer Views / Blocs" />
+
+<section class="grid grid-cols-1">
+
+    <!-- <app-heavy-loaders-slow cssClass="bg-blue-500" /> -->
+
+    <!-- Para un componente pesado -->
+    <!-- Primero se cargan los dempas componentes y luego los de carga diferida o @defer. -->
+    @defer () {
+        <app-heavy-loaders-slow cssClass="bg-blue-500" />
+    } @placeholder {
+        <p class="h-[600px] w-full bg-gradient-to-r from-gray-200 to-gray-400 animate-pulse">
+            Cargando...
+        </p>
+    }
+
+    <!-- Se dispara cuando el navegador llega a un estado inactivo “idle” (inactivo),
+        despues de haber cargado toda la aplicación se cargará esto recien 
+    -->
+    @defer (on idle) {
+        <app-heavy-loaders-slow cssClass="bg-green-500" />
+    } @placeholder {
+        <p class="h-[600px] w-full bg-gradient-to-r from-gray-200 to-gray-400 animate-pulse">
+            Cargando...
+        </p>
+    }
+
+    <!-- Se dispara cuando el bloque entra al punto de vista del usuario. 
+        Por defecto se puede conectar el placeholder y otro elemento. 
+        Cuando el ViewPort lo alcance se comenzará a cargar.
+    -->
+    @defer (on viewport) {
+        <app-heavy-loaders-slow cssClass="bg-purple-500" />
+    } @placeholder {
+        <p class="h-[600px] w-full bg-gradient-to-r from-gray-200 to-gray-400 animate-pulse">
+            Cargando...
+        </p>
+    }
+</section>
