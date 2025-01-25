@@ -1,0 +1,15 @@
+<h1 class="text-3xl">Listado de productos</h1>
+<hr class="my-2" />
+
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
+    <!-- Iteramos la lista -->
+    @for (product of products(); track product.id) {
+        <!-- onIncrementQuantity es el OutPut emitido por el componente hijo (app-product-card)
+            $event es el valor emitido
+        -->
+        <app-product-card 
+            [product]="product"
+            (onIncrementQuantity)="updateProduct(product, $event)"
+        />
+    }
+</div>

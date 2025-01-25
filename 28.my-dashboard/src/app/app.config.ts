@@ -2,7 +2,8 @@ import { ApplicationConfig, importProvidersFrom, provideZoneChangeDetection } fr
 import { provideRouter, withViewTransitions } from '@angular/router';
 
 import { routes } from './app.routes';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 // Ingresamos las rutas
 // Importamos al provider el withViewTransitions que se importa del router y agrega la transicion al cambio de ruta.
@@ -19,8 +20,10 @@ export const appConfig: ApplicationConfig = {
       } ),
     ),
     // Aqui importamos los modulos que se usarán en la aplicación
-    importProvidersFrom(
-      HttpClientModule,
-    )
+    // importProvidersFrom(
+    //   HttpClientModule,
+    // )
+    provideHttpClient(withInterceptorsFromDi()),
+    // provideAnimationsAsync()
   ]
 };
