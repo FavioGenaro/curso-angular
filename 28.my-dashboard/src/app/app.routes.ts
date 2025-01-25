@@ -48,14 +48,33 @@ export const routes: Routes = [
                 loadComponent: () => import('./dashboard/pages/view-transition/view-transition2.component'),
             },
             {
+                path: 'inputs-outputs',
+                title: 'Inputs Outputs',
+                loadComponent: () => import('./dashboard/pages/input-output/input-output.component'),
+            },
+            {
+                path: 'material',
+                title: 'Angular Material',
+                loadComponent: () =>
+                    import('./dashboard/pages/material/material.component'),
+            },
+            {
                 path:'', redirectTo: 'control-flow', pathMatch: 'full',
             }
         ]
     },
-    // para la redirección si el usuario ingresa cualquier otra ruta.
+    // para la redirección si el usuario ingresa cualquier otra ruta. (hacia una ruta vacia)
     {
         path: '',
-        redirectTo: '/dashboard',
+        // redirectTo: '/dashboard',
+        // Ahora podemos colocar una función para definir hacia donde podemos redirigir
+        redirectTo: (route) => {
+            // console.log(route);
+            // Podemos hacer que si esta autenticado redirecciona a un lugar y sino hacia otro, pero no es asincrono
+            // const authService = inject(AuthService);
+            // if (authService.isLoggedIn) {
+            return '/dashboard/material';
+        },
         pathMatch: 'full'
     }
     
