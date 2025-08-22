@@ -6,9 +6,12 @@
 // import "./observable/03-subject";
 
 // import "./observable/04-of";
-import "./observable/05-fromEvent";
+// import "./observable/05-fromEvent";
 
 
-
-
-
+// import "./operadores/01-map-pluck-mapTo";
+// import "./operadores/02-filter";
+// import "./operadores/03-tap";
+// import "./operadores/04-map-lab";
+// import "./operadores/05-reduce";
+import "./operadores/06-scan";

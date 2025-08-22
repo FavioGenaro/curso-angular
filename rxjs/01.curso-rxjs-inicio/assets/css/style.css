@@ -37,6 +37,7 @@ ol {
     text-align: left;
 }
 
+/* Barra de progreso */
 .progress-bar {
     position: fixed;
     top: 0;
@@ -91,3 +92,5 @@ ol {
     -webkit-animation-name: fadeIn;
     animation-name: fadeIn;
 }
+
+
