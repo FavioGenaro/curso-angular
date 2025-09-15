@@ -14,4 +14,6 @@
 // import "./operadores/03-tap";
 // import "./operadores/04-map-lab";
 // import "./operadores/05-reduce";
-import "./operadores/06-scan";
+// import "./operadores/06-scan";
+
+import "./operadores/07-take";
