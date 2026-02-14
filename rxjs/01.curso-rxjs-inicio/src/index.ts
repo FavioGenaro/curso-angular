@@ -16,4 +16,6 @@
 // import "./operadores/05-reduce";
 // import "./operadores/06-scan";
 
-import "./operadores/07-take";
+// import "./operadores/07-take";
+// import "./operadores/08-first";
+import "./operadores/09-takeWhile";
