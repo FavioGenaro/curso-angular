@@ -18,4 +18,8 @@
 
 // import "./operadores/07-take";
 // import "./operadores/08-first";
-import "./operadores/09-takeWhile";
+// import "./operadores/09-takeWhile";
+// import "./operadores/10-takeUntil-skip";
+// import "./operadores/11-distinct";
+// import "./operadores/12-distinctUntilChanged";
+import "./operadores/13-distinctUntilKeyChanged";
