@@ -29,4 +29,4 @@
 // import "./operadores-tiempo/02-throttleTime";
 // import "./operadores-tiempo/03-sampleTime";
 // import "./operadores-tiempo/04-sample";
-import "./operadores-tiempo/05-auditTime";
+// import "./operadores-tiempo/05-auditTime";
