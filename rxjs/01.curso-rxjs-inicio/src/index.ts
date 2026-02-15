@@ -22,4 +22,11 @@
 // import "./operadores/10-takeUntil-skip";
 // import "./operadores/11-distinct";
 // import "./operadores/12-distinctUntilChanged";
-import "./operadores/13-distinctUntilKeyChanged";
+// import "./operadores/13-distinctUntilKeyChanged";
+
+
+// import "./operadores-tiempo/01-debounceTime";
+// import "./operadores-tiempo/02-throttleTime";
+// import "./operadores-tiempo/03-sampleTime";
+// import "./operadores-tiempo/04-sample";
+import "./operadores-tiempo/05-auditTime";
