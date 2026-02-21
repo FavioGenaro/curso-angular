@@ -30,3 +30,9 @@
 // import "./operadores-tiempo/03-sampleTime";
 // import "./operadores-tiempo/04-sample";
 // import "./operadores-tiempo/05-auditTime";
+
+
+// import "./ajax/01-ajax-catchError";
+// import "./ajax/02-getJSON";
+// import "./ajax/03-diff-ajax-getJson-catchError";
+import "./ajax/04-put-post-delete";
