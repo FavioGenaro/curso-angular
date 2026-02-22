@@ -45,31 +45,19 @@ const mostrarUsuarios = ( usuarios: GithubUser[] ) => {
 const input$ = fromEvent<KeyboardEvent>( textInput, 'keyup' );
 
 
-input$.pipe(
-    debounceTime<KeyboardEvent>(500),
-    pluck<KeyboardEvent, string>('target','value'),
-    mergeMap<string, Observable<GithubUsersResp>>( texto => ajax.getJSON(
-        `https://api.github.com/search/users?q=${ texto }`
-    )),
-    pluck<GithubUsersResp, GithubUser[]>('items')
-);//.subscribe( mostrarUsuarios );
+// input$.pipe(
+//     debounceTime<KeyboardEvent>(500),
+//     pluck<KeyboardEvent, string>('target','value'),
+//     mergeMap<string, Observable<GithubUsersResp>>( texto => ajax.getJSON(
+//         `https://api.github.com/search/users?q=${ texto }`
+//     )),
+//     pluck<GithubUsersResp, GithubUser[]>('items')
+// );//.subscribe( mostrarUsuarios );
 
 const url = 'https://httpbin.org/delay/1?arg='; // + fernando
 
+// switchMap cancela la petición anterior y hace una nueva
 input$.pipe(
     pluck('target','value'),
     switchMap( texto => ajax.getJSON(url + texto)  )
 ).subscribe( console.log );
-
-
-
-
-
-
-
-
-
-
-
-
-

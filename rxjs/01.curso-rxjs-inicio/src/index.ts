@@ -38,4 +38,9 @@
 // import "./ajax/04-put-post-delete";
 
 
-import "./transformacion/01-mergeAll";
+// import "./transformacion/01-mergeAll";
+// import "./transformacion/02-mergeMap";
+// import "./transformacion/03-switchMap";
+// import "./transformacion/05-concatMap";
+// import "./transformacion/06-exhaustMap";
+import "./transformacion/07-lab-aplanamiento";
