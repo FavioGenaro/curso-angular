@@ -35,4 +35,7 @@
 // import "./ajax/01-ajax-catchError";
 // import "./ajax/02-getJSON";
 // import "./ajax/03-diff-ajax-getJson-catchError";
-import "./ajax/04-put-post-delete";
+// import "./ajax/04-put-post-delete";
+
+
+import "./transformacion/01-mergeAll";
