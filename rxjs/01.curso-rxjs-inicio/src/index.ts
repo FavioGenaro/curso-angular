@@ -51,4 +51,11 @@
 // import "./combinacion/04-merge";
 // import "./combinacion/05-combineLatest";
 // import "./combinacion/06-forkJoin";
-import "./combinacion/07-forkJoin-lab";
+// import "./combinacion/07-forkJoin-lab";
+
+// import "./ejercicios/01-capitalizar";
+// import "./ejercicios/02-reduce";
+// import "./ejercicios/03-randoms";
+// import "./ejercicios/04-cuenta-regresiva";
+// import "./ejercicios/05-combinar";
+import "./ejercicios/06-luke-skywalker";

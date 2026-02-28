@@ -24,6 +24,7 @@ const miIterable = miGenerador();
 // for( let id of miIterable ){
 //     console.log(id);
 // }
+// from toma un iterable, lo recorre y emite cada valor
 from( miIterable ).subscribe( observer );
 
 
