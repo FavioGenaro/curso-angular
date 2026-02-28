@@ -43,4 +43,12 @@
 // import "./transformacion/03-switchMap";
 // import "./transformacion/05-concatMap";
 // import "./transformacion/06-exhaustMap";
-import "./transformacion/07-lab-aplanamiento";
+// import "./transformacion/07-lab-aplanamiento";
+
+// import "./combinacion/01-startWith-endWith";
+// import "./combinacion/02-lab-startWith";
+// import "./combinacion/03-concat";
+// import "./combinacion/04-merge";
+// import "./combinacion/05-combineLatest";
+// import "./combinacion/06-forkJoin";
+import "./combinacion/07-forkJoin-lab";
